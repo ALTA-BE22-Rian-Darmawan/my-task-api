@@ -26,11 +26,15 @@ func (ts *taskService) Create(task task.TaskEntity) error {
 		return errors.New("task status must be completed or not completed")
 	}
 
-	err := ts.taskData.Insert(task)
+	project, err := ts.taskData.SelectByProjectId(task.ProjectID)
 	if err != nil {
 		return err
 	}
-	return nil
+	if project == nil {
+		return errors.New("project not found")
+	}
+
+	return ts.taskData.Insert(task)
 }
 
 // Delete implements task.ServiceTaskInterface.
