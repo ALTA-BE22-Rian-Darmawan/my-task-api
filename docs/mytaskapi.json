@@ -1,0 +1,389 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "version": "1.0.0",
+      "title": "Project-my-task-app",
+      "description": "Project my task app"
+    },
+    "servers": [
+      {
+        "description": "SwaggerHub API Auto Mocking",
+        "url": "https://virtserver.swaggerhub.com/RianDarmawan/MyTaskApp/1.0.0"
+      }
+      ],
+  "paths": {
+    "/projects": {
+        "get": {
+                "security": [
+                  {
+                    "JWTAuth": []
+                  }
+                  ],
+                "tags": ["Projects"],
+                "summary": "get all project",
+                "description": "get all active project",
+                "responses": {
+                    "200": {
+                        "description": "succes get all project",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                  "$ref": "#/components/schemas/project"
+                                },
+                                "examples": {
+                                    "success": {
+                                        "description": "Example get all project",
+                                        "value":
+                                          {
+                                        "massage": "success read project",
+                                        "result": [{
+                                              "id": 1,
+                                              "user id": 1,
+                                              "project_name": "project a",
+                                              "description": "this is project a"
+                                            }],
+                                        "status": "success"
+                                          }
+                                    }
+                                }
+                          }
+                        }
+                    }
+                }
+            },
+          "post": {
+              "tags": ["Projects"],
+                "summary": "post project",
+                "description": "create new project",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                          "schema": {
+                              "$ref": "#/components/schemas/CreateOrUpdateProject"
+                          },
+                          "examples": {
+                            "success": {
+                                "description": "Example create project",
+                                "value":
+                                  {
+                                  "project_name": "project a",
+                                  "description": "this is project a"
+                                  }
+                            }
+                          }
+                        }
+                    }
+                },
+                "responses": {
+                  "200": {
+                      "description": "success create project",
+                      "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "massage": {
+                                        "type": "string"
+                                    },
+                                    "status": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "success": {
+                                    "description": "Example create project",
+                                    "value":
+                                      {
+                                      "massage": "success add project",
+                                      "status": "success"
+                                      }
+                                }
+                            }
+                        }
+                      }
+                  }
+                }  
+          }
+    },
+    "/projects/{id}": {
+      "delete": {
+              "security": [
+                {
+                  "JWTAuth": []
+                }
+                ],
+              "tags": ["Projects By Id"],
+              "summary": "Delete existing project",
+              "description": "Delete existing project by id",
+              "parameters": [
+              {
+                  "$ref": "#/components/parameters/Id"
+              }
+              ],
+              "responses": {
+                  "200": {
+                      "description": "success delete project",
+                      "content": {
+                          "application/json": {
+                              "schema": {
+                                 "type": "integer",
+                                 "properties": {
+                                    "success": {
+                                        "type": "string"
+                                    },
+                                     "status": {
+                                         "type": "string"
+                                     }
+                                 }
+                              },
+                              "examples": {
+                                  "success": {
+                                      "description": "success delete project",
+                                      "value": {
+                                          "successs": "success delete project",
+                                          "status": "success"
+                                      }
+                                  }
+                              }
+                          }
+                      }
+                  }
+              }
+          },
+     "put": {
+        "security": [
+          {
+            "JWTAuth": []
+          }
+          ],
+          "tags": ["Projects By Id"],
+          "summary": "Update existing project",
+          "description": "Update existing project by id",
+          "parameters":[
+            {
+              "$ref": "#/components/parameters/Id"
+            }
+            ],
+          "requestBody": {
+              "required": true,
+              "content": {
+                  "application/json": {
+                      "schema": {
+                          "$ref": "#/components/schemas/CreateOrUpdateProject"
+                    },
+                    "examples": {
+                        "success": {
+                            "description": "Example update project",
+                            "value":
+                              {
+                              "project_name": "update project a",
+                              "description": "this is update project a"
+                              }
+                        }
+                      }
+                  }
+              }
+          },
+        "responses": {
+            "200": {
+                "description": "success update project",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "massage": {
+                                    "type": "string"
+                                },
+                                "status": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "examples": {
+                            "success": {
+                                "description": "Example update project",
+                                "value":
+                                  {
+                                  "massage": "success update project",
+                                  "status": "success"
+                                  }
+                            }
+                          }
+                    }
+                }
+            }
+        }
+     },
+     "get": {
+        "security": [
+          {
+            "JWTAuth": []
+          }
+          ],
+          "tags": ["Projects By Id"],
+          "summary": "Get project by id",
+          "description": "Get project by id",
+          "parameters": [
+            {
+              "$ref": "#/components/parameters/Id"
+            }
+            ],
+            "responses": {
+                "200": {
+                    "description": "success get project by id",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                               "type": "object",
+                               "properties": {
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "id": {
+                                                "type": "integer"
+                                            },
+                                            "user id": {
+                                                "type": "integer"
+                                            },
+                                            "project name": {
+                                                "type": "string"
+                                            },
+                                            "description": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                },
+                                "task": {
+                                    "type": "object",
+                                     "properties": {
+                                        "id": {
+                                            "type": "integer"
+                                        },
+                                        "project id": {
+                                            "type": "integer"
+                                        },
+                                        "task name": {
+                                            "type": "string"
+                                        },
+                                        "description": {
+                                            "type": "string"
+                                        }
+                                     }
+                                },
+                                "status": {
+                                    "type": "string"
+                                }
+                               }
+                            },
+                            "examples": {
+                                "success": {
+                                    "description": "success get project by id",
+                                    "value": {
+                                        "data": {
+                                            "id": 1,
+                                        "user id": 1,
+                                        "project name": "project a",
+                                        "description": "this is project a",
+                                        "task": [{
+                                            "id": 1,
+                                             "project id": 1,
+                                             "task name": "task a",
+                                             "description": "this is task a"}
+                                        ]
+                                        },
+                                        "massage": "successfully retrieved project",
+                                        "status": "success"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+     }
+    }
+  },
+  "components": {
+      "securitySchemes": {
+          "JWTAuth": {
+              "description": "token for admin",
+               "type": "http",
+               "scheme": "bearer",
+               "bearerFormat": "JWT"
+          },
+          "ProjectAuth": {
+              "description": "Authentication for Project RESTful API",
+              "type": "apiKey",
+              "in": "header",
+              "name": "X-API-Key"
+          }
+      },
+      "parameters": {
+        "Id": {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "project id",
+          "schema": {
+              "type": "integer"
+          },
+          "examples": {
+            "success": {
+              "description": "Example id",
+              "value": "1"
+            }
+          }
+        }
+      },
+      "schemas": {
+          "project": {
+              "type": "object",
+              "properties": {
+                "massage": {
+                    "type": "string"
+                },
+                "result": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "integer"
+                            },
+                            "user id": {
+                                "type": "integer"
+                            },
+                            "project name": {
+                                "type": "string"
+                            },
+                            "description": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "status": {
+                    "type": "string"
+                }
+              }
+          },
+          "CreateOrUpdateProject": {
+              "type": "object",
+              "properties": {
+                  "project_name": {
+                      "type": "string"
+                  },
+                  "description": {
+                      "type": "string"
+                  }
+              }
+          }
+      }
+  }
+  }
